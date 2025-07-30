@@ -69,7 +69,41 @@ You can also consider moving Power BI workspaces to shared capacity, provided th
 
 [Surge protection](surge-protection.md) helps limit overuse of your capacity by limiting the total amount of compute background jobs consume. This reduces total compute so interactive delays or rejections are less likely. It also helps the capacity recover faster if there's a period of throttling or rejections. You configure surge protection for each capacity. Surge protection helps prevent throttling and rejections but isn't a substitute for capacity optimization, scaling up, and scaling out. 
 
-When surge protection is active, background jobs are rejected. This means there's impact across your capacity even when surge protection is enabled. By using surge protection, you're tuning your capacity to stay within a range of usage that best balances compute needs within the capacity. To fully protect critical solutions, it's recommended to isolate them in a correctly sized capacity. 
+When surge protection is active, background jobs are rejected. This means there's impact across your capacity even when surge protection is enabled. By using surge protection, you're tuning your capacity to stay within a range of usage that best balances compute needs within the capacity. To fully protect critical solutions, it's recommended to isolate them in a correctly sized capacity.
+
+## Cost and storage control strategies
+
+When costs or storage usage are out of control, use these strategies in combination with the [Microsoft Fabric Capacity Metrics app](metrics-app.md) to regain control:
+
+### Immediate cost control actions
+
+1. **Identify cost drivers**: Use the [Chargeback app](chargeback-app.md) to understand which teams, users, and workloads are driving capacity usage.
+2. **Review throttling patterns**: Check the [throttling charts](metrics-app-compute-page.md#throttling) to identify if you're consistently over capacity limits, which may indicate oversized operations.
+3. **Audit high-consumption items**: Use the [matrix by item and operation](metrics-app-compute-page.md#matrix-by-item-and-operation) to find items consuming the most CU seconds and investigate optimization opportunities.
+
+### Storage cost management
+
+For large storage capacities (1TB+):
+
+1. **Storage triage**: Use the [storage page](metrics-app-storage-page.md) to identify workspaces with the highest billable storage percentages.
+2. **Review data retention**: Implement appropriate data lifecycle policies for OneLake data to reduce long-term storage costs.
+3. **Optimize data formats**: Consider using more efficient storage formats like Delta Lake for frequently accessed data.
+4. **Clean up soft-deleted data**: Monitor and clean up soft-deleted workspaces and data that continue to incur charges.
+
+### Capacity planning for cost control
+
+- **Set utilization targets**: Aim for 70-80% average utilization to balance cost efficiency with performance headroom.
+- **Monitor growth trends**: Use the metrics app's historical data to project capacity needs and budget accordingly.
+- **Implement cost alerts**: Set up monitoring to alert when utilization exceeds thresholds that indicate potential cost overruns.
+
+### Emergency cost reduction measures
+
+When immediate action is needed:
+
+1. **Pause non-critical workloads**: Temporarily pause or reschedule non-critical background operations during peak usage periods.
+2. **Scale down temporarily**: Consider temporarily moving some workloads to smaller capacities or shared capacity if appropriate.
+3. **Implement usage quotas**: Use workspace-level settings to limit resource consumption for non-critical workloads.
+4. **Emergency capacity scaling**: Scale up temporarily to avoid user impact while implementing longer-term optimizations. 
 
 ## Compute optimization by Fabric experience
 

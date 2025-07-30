@@ -170,6 +170,15 @@ A matrix table that displays metrics for each item on the capacity. To gain a be
 
 You can hover over any value in the visual to see operation level data. You can also filter the visual with the item kind slicer and add or remove columns using the optional columns slicer.
 
+### Using the matrix for cost control
+
+To identify cost optimization opportunities:
+
+1. **Sort by CU (s)**: Identify items consuming the most capacity units over the past two weeks. These are your highest cost drivers.
+2. **Check performance delta**: Items with negative performance delta (red/orange) may be becoming less efficient and driving up costs.
+3. **Review user count**: High CU usage with low user count may indicate inefficient operations that need optimization.
+4. **Analyze billing type**: Focus first on "Billable" items as these directly impact your costs.
+
 The colors in the matrix represent your [performance delta](metrics-app-calculations.md#performance-delta):
 * *No color* - A value higher than -10.
 * *Orange* - A value between -10 and -25.
