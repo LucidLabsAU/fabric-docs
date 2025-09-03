@@ -17,6 +17,13 @@ Fabric resides on a capacity which is a pool of resources allocated to your plat
 
 The Microsoft Fabric Capacity Metrics app is designed to provide monitoring capabilities for Microsoft Fabric capacities. Use the app to monitor your capacity consumption and make informed decisions on how to use your capacity resources. For example, the app can help identify when to scale up your capacity or when to turn on [autoscale](/power-bi/enterprise/service-premium-auto-scale).
 
+The app provides comprehensive insights for cost and storage management, especially important for large capacities where costs can quickly spiral out of control. Key capabilities include:
+
+- **Cost visibility**: Track which workspaces, users, and operations are driving the highest costs through CU consumption patterns
+- **Storage optimization**: Monitor storage growth trends and identify opportunities to reduce billable storage usage
+- **Performance insights**: Understand how capacity utilization affects user experience and identify optimization opportunities
+- **Capacity planning**: Use historical data to make informed decisions about scaling and resource allocation
+
 The app is updated often with new features and functionalities and provides the most in-depth information into how your capacities are performing.
 
 ## Install the app
@@ -24,6 +31,38 @@ The app is updated often with new features and functionalities and provides the 
 You must be a capacity admin to install and view the Microsoft Fabric Capacity Metrics app.
 
 To install the app, follow the instructions in [Install the Microsoft Fabric Capacity Metrics app](metrics-app-install.md).
+
+## Interpreting insights for cost and storage control
+
+When capacity costs or storage usage are concerning, use these approaches to extract actionable insights from the metrics app:
+
+### Identifying cost overruns
+
+1. **Review the [compute page](metrics-app-compute-page.md)**: Look for consistently high utilization percentages or frequent throttling events that indicate oversized operations or insufficient capacity.
+
+2. **Analyze the [matrix by item and operation](metrics-app-compute-page.md#matrix-by-item-and-operation)**: Sort by "CU (s)" to identify the highest resource consumers. Focus optimization efforts on these items first.
+
+3. **Check [performance delta](metrics-app-calculations.md#performance-delta)**: Items showing negative performance delta (red or orange) may be becoming less efficient and driving increased costs.
+
+### Storage growth analysis
+
+1. **Monitor [storage trends](metrics-app-storage-page.md)**: Watch for sudden increases in the "Cumulative billable storage (GB) by date" chart that indicate unexpected data growth.
+
+2. **Identify storage hotspots**: Use the "Top workspaces by billable storage %" table to focus cleanup efforts on the highest-impact areas.
+
+3. **Review billing patterns**: Compare "Current storage (GB)" with "Billable storage (GB)" to understand your cost exposure and identify opportunities for data lifecycle optimization.
+
+### Emergency response using metrics
+
+When immediate action is needed:
+
+1. **Throttling alerts**: If background rejection shows >100%, all requests are being rejected. Use the [calculation formulas](metrics-app-calculations.md#calculate-the-time-to-recover-from-throttling) to estimate recovery time.
+
+2. **Capacity overload**: Interactive rejection >100% means user requests are failing. Consider immediate capacity scaling or workload redistribution.
+
+3. **Storage intervention**: Rapidly increasing billable storage may require immediate investigation of data ingestion processes or retention policies.
+
+For comprehensive cost management strategies, see [Evaluate and optimize your Microsoft Fabric capacity](optimize-capacity.md).
 
 ## Considerations and limitations
 
